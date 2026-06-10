@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Discord Spam Pro | API Thật – Vàng Đen Quý Tộc</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 20%, #0a0708 0%, #000000 100%);
+            padding: 2rem 1rem;
+            position: relative;
+        }
+
+        /* hiệu ứng ánh sáng vàng */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 70% 30%, rgba(212, 175, 55, 0.12), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* card hoàng gia */
+        .royal-card {
+            background: rgba(10, 8, 12, 0.88);
+            backdrop-filter: blur(12px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(212, 175, 55, 0.1) inset;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0b0a0e 0%, #16121a 100%);
+            padding: 1.5rem 2rem;
+            border-bottom: 2px solid #d4af37;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-area {
+            width: 56px;
+            height: 56px;
+            background: url('https://sf-static.upanhlaylink.com/img/image_2026060946fe6a194bb186109153ddf65f386d60.jpg') center/cover;
+            border-radius: 50%;
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+        }
+
+        .title h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f5e7a3, #d4af37, #b88d1a);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .title p {
+            color: #c9b37c;
+            font-size: 0.85rem;
+        }
+
+        .content {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f3e2b0;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: #0f0c11;
+            border: 1px solid #4a3b1f;
+            color: #f5e6c4;
+            padding: 0.8rem 1rem;
+            border-radius: 1.2rem;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            outline: none;
+            font-family: monospace;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.3);
+            background: #141018;
+        }
+
+        .row-2 {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .row-2 .form-group {
+            flex: 1;
+        }
+
+        button {
+            background: linear-gradient(105deg, #1f1a0c, #0b0702);
+            border: 1px solid #d4af37;
+            padding: 0.8rem 2rem;
+            border-radius: 2.5rem;
+            font-weight: bold;
+            color: #ffefb9;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        button:hover {
+            background: linear-gradient(105deg, #2f2814, #1a1305);
+            border-color: #f1cf5e;
+            transform: scale(1.02);
+        }
+
+        .btn-gold {
+            background: linear-gradient(105deg, #d4af37, #b88a1a);
+            color: #0a0702;
+            border: none;
+            font-weight: 800;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(105deg, #e6c34d, #c9991f);
+            color: black;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        .btn-danger {
+            background: linear-gradient(105deg, #4a1a1a, #2b0c0c);
+            border-color: #ab6f3a;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(105deg, #6e2b2b, #3e1515);
+        }
+
+        /* tasks */
+        .tasks-section {
+            margin-top: 2rem;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            padding-top: 1.5rem;
+        }
+
+        .tasks-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tasks-header h3 {
+            color: #efd68a;
+            font-size: 1.4rem;
+        }
+
+        .task-count-badge {
+            background: #1e1912;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            border: 1px solid #d4af37;
+            color: #f1d78c;
+        }
+
+        .task-list {
+            background: #05030780;
+            border-radius: 1.5rem;
+            padding: 0.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .task-item {
+            background: #120e16;
+            margin: 0.7rem 0;
+            padding: 1rem;
+            border-radius: 1.2rem;
+            border-left: 5px solid #d4af37;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: 0.1s;
+        }
+
+        .task-info {
+            flex: 3;
+            font-size: 0.8rem;
+            font-family: monospace;
+            color: #cfc3a0;
+        }
+
+        .task-info span {
+            color: #f3d572;
+            font-weight: bold;
+        }
+
+        .log-area {
+            margin-top: 8px;
+            background: #08060c;
+            border-radius: 1rem;
+            padding: 6px 10px;
+            font-size: 0.7rem;
+            max-height: 80px;
+            overflow-y: auto;
+            color: #bbb08a;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .stop-task {
+            background: #2c1616;
+            border: 1px solid #b36b3a;
+            padding: 5px 16px;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            color: #ffc285;
+        }
+
+        .stop-task:hover {
+            background: #5a2626;
+            border-color: #e0a343;
+            color: white;
+        }
+
+        .empty-tasks {
+            text-align: center;
+            padding: 2rem;
+            color: #b19360;
+            font-style: italic;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.7rem;
+            color: #b89f6c;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            background: #0a080e;
+        }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #19141c; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+
+        @media (max-width: 680px) {
+            .content { padding: 1.2rem; }
+            .task-item { flex-direction: column; }
+            .task-actions { align-self: flex-end; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="royal-card">
+        <div class="header">
+            <div class="logo-area"></div>
+            <div class="title">
+                <h1>✦ DARK SPHERE | API THẬT ✦</h1>
+                <p>Discord real-time • Token user • Gửi tin nhắn thật</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="form-group">
+                <label>🎫 User Token (mỗi token 1 dòng / cách dấu phẩy)</label>
+                <input type="text" id="tokenInput" placeholder="Nhập token Discord thật ...">
+            </div>
+            <div class="row-2">
+                <div class="form-group">
+                    <label>📢 Channel ID</label>
+                    <input type="text" id="channelId" placeholder="123456789012345678">
+                </div>
+                <div class="form-group">
+                    <label>⏱️ Delay (giây)</label>
+                    <input type="number" id="delaySec" value="4" step="0.5" min="0.8">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>💬 Nội dung spam</label>
+                <textarea id="messageContent" rows="3" placeholder="Tin nhắn gửi lặp lại..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 18px; margin: 0.8rem 0 0.5rem; flex-wrap: wrap;">
+                <button id="startBtn" class="btn-gold"><span>⚡</span> BẮT ĐẦU SPAM</button>
+                <button id="stopAllBtn" class="btn-danger"><span>⛔</span> DỪNG TẤT CẢ</button>
+            </div>
+
+            <div class="tasks-section">
+                <div class="tasks-header">
+                    <h3>📜 DANH SÁCH TASK (THẬT)</h3>
+                    <span id="taskCount" class="task-count-badge">0 task</span>
+                </div>
+                <div id="taskListContainer" class="task-list">
+                    <div class="empty-tasks">✨ Chưa có task. Nhập token và bấm BẮT ĐẦU.</div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            🛡️ Gửi tin nhắn thật qua Discord API. Token user cần quyền gửi tin. Dùng đúng ID kênh.
+        </footer>
+    </div>
+</div>
+
+<script>
+    // ======================== STATE ========================
+    let tasks = [];           // { id, token, channelId, message, delaySec, isActive, intervalId, logs }
+    let nextTaskId = 1;
+
+    // DOM elements
+    const tokenInput = document.getElementById('tokenInput');
+    const channelIdInput = document.getElementById('channelId');
+    const delaySecInput = document.getElementById('delaySec');
+    const messageInput = document.getElementById('messageContent');
+    const startBtn = document.getElementById('startBtn');
+    const stopAllBtn = document.getElementById('stopAllBtn');
+    const taskListContainer = document.getElementById('taskListContainer');
+    const taskCountSpan = document.getElementById('taskCount');
+
+    // ========== HÀM GỬI TIN NHẮN DISCORD (API THẬT) ==========
+    async function sendDiscordMessage(token, channelId, message) {
+        const url = `https://discord.com/api/v9/channels/${channelId}/messages`;
+        const headers = {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        };
+        const payload = { content: message };
+
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 10000);
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(payload),
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+
+            if (response.status === 200 || response.status === 201) {
+                return { success: true, status: response.status };
+            } else {
+                let errorText = '';
+                try { errorText = await response.text(); } catch(e) {}
+                return { success: false, status: response.status, error: errorText.substring(0, 120) };
+            }
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
+    }
+
+    // ========== THÊM LOG VÀO TASK ==========
+    function addLogToTask(taskId, logMsg, type = 'info') {
+        const task = tasks.find(t => t.id === taskId);
+        if (!task) return;
+        if (!task.logs) task.logs = [];
+        task.logs.unshift({
+            time: new Date().toLocaleTimeString(),
+            msg: logMsg,
+            type: type
+        });
+        if (task.logs.length > 22) task.logs.pop();
+        renderTaskList();
+    }
+
+    // ========== VÒNG LẶP SPAM (setInterval) ==========
+    function startTaskLoop(task) {
+        if (task.intervalId) clearInterval(task.intervalId);
+        task.isActive = true;
+
+        // Hàm gửi 1 lần và log
+        const sendOnce = async () => {
+            if (!task.isActive) return;
+            const result = await sendDiscordMessage(task.token, task.channelId, task.message);
+            if (result.success) {
+                addLogToTask(task.id, `✅ Thành công: "${task.message.substring(0, 55)}"`, 'success');
+            } else {
+                let errorMsg = result.error || `HTTP ${result.status}`;
+                addLogToTask(task.id, `❌ Thất bại: ${errorMsg.substring(0, 80)}`, 'error');
+                // nếu token chết (401) thì dừng task luôn
+                if (result.status === 401 || (result.error && result.error.includes('401'))) {
+                    addLogToTask(task.id, '🔴 Token không hợp lệ → dừng task', 'error');
+                    stopTaskById(task.id);
+                }
+            }
+        };
+
+        // gửi ngay lần đầu
+        sendOnce();
+        // lặp theo delay
+        const intervalMs = task.delaySec * 1000;
+        task.intervalId = setInterval(async () => {
+            if (!task.isActive) {
+                if (task.intervalId) clearInterval(task.intervalId);
+                return;
+            }
+            await sendOnce();
+        }, intervalMs);
+    }
+
+    // ========== DỪNG TASK ==========
+    function stopTaskById(taskId) {
+        const task = tasks.find(t => t.id === taskId);
+        if (!task) return;
+        if (task.intervalId) {
+            clearInterval(task.intervalId);
+            task.intervalId = null;
+        }
+        task.isActive = false;
+        addLogToTask(taskId, '⏹️ Dừng task theo yêu cầu', 'info');
+        // xóa khỏi mảng sau 500ms
+        setTimeout(() => {
+            const idx = tasks.findIndex(t => t.id === taskId);
+            if (idx !== -1 && !tasks[idx].isActive) {
+                tasks.splice(idx, 1);
+                renderTaskList();
+            }
+        }, 400);
+        renderTaskList();
+    }
+
+    // ========== DỪNG TẤT CẢ ==========
+    function stopAllTasks() {
+        for (let i = tasks.length - 1; i >= 0; i--) {
+            const t = tasks[i];
+            if (t.intervalId) clearInterval(t.intervalId);
+            t.isActive = false;
+            addLogToTask(t.id, '⛔ Dừng toàn bộ task', 'info');
+        }
+        setTimeout(() => {
+            tasks = tasks.filter(t => t.isActive === false);
+            renderTaskList();
+        }, 500);
+        renderTaskList();
+    }
+
+    // ========== TẠO TASK MỚI ==========
+    function createTask(token, channelId, message, delaySec) {
+        const id = nextTaskId++;
+        const newTask = {
+            id: id,
+            token: token,
+            channelId: channelId,
+            message: message,
+            delaySec: delaySec,
+            isActive: true,
+            logs: [],
+            intervalId: null
+        };
+        tasks.push(newTask);
+        startTaskLoop(newTask);
+        renderTaskList();
+        return newTask;
+    }
+
+    // ========== RENDER DANH SÁCH TASK (cập nhật UI) ==========
+    function renderTaskList() {
+        taskCountSpan.innerText = `${tasks.length} task`;
+        if (tasks.length === 0) {
+            taskListContainer.innerHTML = `<div class="empty-tasks">💎 Không có task đang chạy. Nhập token và bấm BẮT ĐẦU.</div>`;
+            return;
+        }
+        let html = '';
+        for (const task of tasks) {
+            const logsHtml = (task.logs || []).slice(0, 5).map(log => {
+                let color = '#c9b37c';
+                if (log.type === 'success') color = '#b5e3a0';
+                if (log.type === 'error') color = '#f0a07c';
+                return `<div style="font-size: 0.7rem; color: ${color}; margin: 3px 0;">[${log.time}] ${log.msg}</div>`;
+            }).join('');
+            html += `
+                <div class="task-item" data-id="${task.id}">
+                    <div class="task-info">
+                        <div><span>🔑 Token:</span> ${task.token.substring(0, 28)}...${task.token.length > 28 ? '' : ''}</div>
+                        <div><span>📢 Channel:</span> ${task.channelId}</div>
+                        <div><span>💬 Msg:</span> ${task.message.substring(0, 65)}${task.message.length > 65 ? '…' : ''}</div>
+                        <div><span>⏱️ Delay:</span> ${task.delaySec}s | <span>🟢 Trạng thái:</span> ${task.isActive ? 'Đang chạy' : 'Đã dừng'}</div>
+                        <div class="log-area">
+                            ${logsHtml || '<i>⏳ Chưa có hoạt động...</i>'}
+                        </div>
+                    </div>
+                    <div class="task-actions">
+                        <button class="stop-task" data-id="${task.id}">⏹️ STOP</button>
+                    </div>
+                </div>
+            `;
+        }
+        taskListContainer.innerHTML = html;
+        // gắn sự kiện stop cho từng nút
+        document.querySelectorAll('.stop-task').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const id = parseInt(btn.getAttribute('data-id'));
+                if (!isNaN(id)) stopTaskById(id);
+            });
+        });
+    }
+
+    // ========== XỬ LÝ BẮT ĐẦU (phân tích token, tạo task) ==========
+    function startSpam() {
+        let tokenRaw = tokenInput.value.trim();
+        if (!tokenRaw) {
+            alert('❌ Vui lòng nhập ít nhất một token Discord');
+            return;
+        }
+        const channelId = channelIdInput.value.trim();
+        if (!channelId || !/^\d+$/.test(channelId)) {
+            alert('❌ Channel ID không hợp lệ (phải là số)');
+            return;
+        }
+        const message = messageInput.value.trim();
+        if (!message) {
+            alert('❌ Nội dung spam không được để trống');
+            return;
+        }
+        let delaySec = parseFloat(delaySecInput.value);
+        if (isNaN(delaySec) || delaySec < 0.8) delaySec = 3;
+
+        // tách token (dấu phẩy, xuống dòng, hoặc khoảng trắng)
+        let tokens = [];
+        if (tokenRaw.includes('\n')) {
+            tokens = tokenRaw.split('\n').map(t => t.trim()).filter(t => t.length > 0);
+        } else if (tokenRaw.includes(',')) {
+            tokens = tokenRaw.split(',').map(t => t.trim()).filter(t => t.length > 0);
+        } else {
+            tokens = [tokenRaw];
+        }
+
+        if (tokens.length === 0) {
+            alert('❌ Không có token hợp lệ');
+            return;
+        }
+
+        for (const token of tokens) {
+            // kiểm tra task trùng token + channel (không bắt buộc nhưng tránh spam cùng lúc quá nhiều)
+            const existing = tasks.find(t => t.token === token && t.channelId === channelId && t.isActive);
+            if (existing) {
+                addLogToTask(existing.id, `⚠️ Token này đã có task đang chạy, bỏ qua`, 'info');
+                continue;
+            }
+            createTask(token, channelId, message, delaySec);
+        }
+    }
+
+    // ========== GÁN SỰ KIỆN ==========
+    startBtn.addEventListener('click', startSpam);
+    stopAllBtn.addEventListener('click', stopAllTasks);
+
+    // placeholder gợi ý
+    tokenInput.placeholder = "NDI5MTk4... (mỗi token cách dấu phẩy hoặc xuống dòng)";
+    channelIdInput.placeholder = "123456789012345678";
+    messageInput.placeholder = "✨ Tin nhắn gửi thật lên Discord ✨";
+    console.log("✅ Discord Spam API thật – giao diện quý tộc vàng đen");
+</script>
+</body>
+</html>
